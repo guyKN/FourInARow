@@ -9,9 +9,9 @@ namespace FourInARow
 
         static readonly int numNeededInRow=4;
 
-        public enum Cell
+        public enum Cell //each cell on the board can either be empty, represented by _, or filled with an X or O, represented by that letter. 
         {
-            _ = 0, // _ represents an empty cell
+            _ = 0, 
             X = 1,
             O = 2
         }
@@ -21,7 +21,7 @@ namespace FourInARow
             O=1
         }
 
-        public enum WinState
+        public enum WinState //used to say who is winning.
         {
             noWinner = 0,
             Xwins = 1,
@@ -29,7 +29,7 @@ namespace FourInARow
             tie=3
         }
 
-        private Cell[,] pos;
+        private Cell[,] pos; // pos is a 7 by 6 array of Cell objects. each cell object can either be X, O or _(which means it is empty.)
         public ActivePlayer activePlayer; // the player whoose turn it currently is
         
 
@@ -38,7 +38,7 @@ namespace FourInARow
             return pos;
         }
 
-        private void ResetPos() //Resets the Pos variable to be full of empty cells. 
+        private void ResetPos() //Resets the Pos variable to be full of empty cells. Called at the start of the game. 
         {
             pos = new Cell[7, 6];
             for(int i = 0; i > pos.GetLength(0); i++)
@@ -50,30 +50,30 @@ namespace FourInARow
             }
         }
 
-        public FourInARowPos()
+        public FourInARowPos() // Constructor for the FourInARowPos class. Creates a pos variable filled with just blank spaces, and sets the current player to X. 
         {
             pos = new Cell[7, 6];
             ResetPos();
             activePlayer = ActivePlayer.X; // X starts
         }
 
-        public void placeChip(int row)
+        public void placeChip(int row) //puts a X or O (depending on who the active player is) onto the lowest spot into the declared row. 
         {
             
-            Cell activePlayerCell = getActivePlayerCellValue();  
-            if(row>6 | row < 0) //todo: make dynamicly change
+            Cell activePlayerCell = getActivePlayerCellValue();  // is equal to Cell.X or Cell.O, depending on whoose turn it is. 
+            if(row>6 | row < 0) 
             {
                 throw new System.ArgumentException("Row must be between 0 and 6. ", "original");
             }
-            for (int j = 0; j < pos.GetLength(1); j++)
+            for (int j = 0; j < pos.GetLength(1); j++) //starts on the lowest cell, if it's empty, adds the player's chip to it and ends the function. Otherwise, goes up by 1 cell. 
             {
-                if (pos[row, j] == Cell._)
+                if (pos[row, j] == Cell._)//checks if cell is empty. 
                 {
                     pos[row, j] = activePlayerCell;
                     return;
                 }
             }
-            throw new System.ArgumentException("Can't place chip into full row. ", "original");
+            throw new System.ArgumentException("Can't place chip into full row. ", "original"); // if no cell is empty in that row, then throw an exception, because you can't add a chip to a full row
         }
 
         private Cell getActivePlayerCellValue()
@@ -93,7 +93,7 @@ namespace FourInARow
             }
         }
 
-        public void switchActivePlayer()
+        public void switchActivePlayer() // if the active player is X, sets it to O. If active player is O, sets it to X. 
         {
             if (activePlayer == ActivePlayer.O)
             {
@@ -107,11 +107,11 @@ namespace FourInARow
 
         }
 
-        public void printPos()
+        public void printPos() //prints the current position in a way that's easy to read for the player. 
         {
             for (int j = pos.GetLength(1)-1; j >=0; j--)
             {
-                if(j != pos.GetLength(1)-1) //write something else in the first line
+                if(j != pos.GetLength(1)-1) //write something diffrent in the first line
                 {
                     Console.WriteLine("+---+---+---+---+---+---+---+");
                 }
@@ -124,7 +124,7 @@ namespace FourInARow
             Console.WriteLine("+-1-+-2-+-3-+-4-+-5-+-6-+-7-+");
         }
 
-        private string cellToStr(Cell cell) {
+        private string cellToStr(Cell cell) { //given a cell returns a string so that it can be read by the player. 
             if(cell == Cell.X)
             {
                 return "X";
@@ -140,9 +140,9 @@ namespace FourInARow
             }
         }
 
-        private WinState checkWinStateOfCells(Cell cell1, Cell cell2, Cell cell3, Cell cell4)
-        {
-            if(cell1==Cell.O & cell2 == Cell.O & cell3 == Cell.O & cell4 == Cell.O)
+        private WinState checkWinStateOfCells(Cell cell1, Cell cell2, Cell cell3, Cell cell4){ //given 4 cells, if all of them are O, then O wins. If all of them are X, then X wins. 
+            //called by checkWinstateVertical,  checkWinstateHorizontal, checkWinstateDiagonalRightUp,checkWinstateDiagonalRightDown
+            if (cell1==Cell.O & cell2 == Cell.O & cell3 == Cell.O & cell4 == Cell.O)
             {
                 return WinState.Owins;
             }else if (cell1 == Cell.X & cell2 == Cell.X & cell3 == Cell.X & cell4 == Cell.X)
@@ -155,7 +155,7 @@ namespace FourInARow
             }
         }
 
-        private WinState checkWinstateVertical()
+        private WinState checkWinstateVertical() //checks every combination of 4 cells vertically in a row, and calls checkWinStateOfCells on them. 
         {
             for (int i = 0; i < pos.GetLength(0); i++)
             {
@@ -168,11 +168,11 @@ namespace FourInARow
                     }
                 }
             }
-            return WinState.noWinner;
+            return WinState.noWinner; // if no winner has been found in the entire loop, then there is no winner. 
 
         }
 
-        private WinState checkWinstateHorizontal()
+        private WinState checkWinstateHorizontal()//checks every combination of 4 cells horizontally in a row, and calls checkWinStateOfCells on them.
         {
             for (int i = 0; i < pos.GetLength(0) - numNeededInRow + 1; i++)
             {
@@ -188,14 +188,14 @@ namespace FourInARow
             return WinState.noWinner;
 
         }
-        private WinState checkTie() {
+        private WinState checkTie() { // if every cell is filled, then it is a tie. 
             for (int i = 0; i < pos.GetLength(0); i++)
             {
                 for (int j = 0; j < pos.GetLength(1); j++)
                 {
                     if(pos[i, j] == Cell._)
                     {
-                        return WinState.noWinner;
+                        return WinState.noWinner; // there is a cell that is not filled, so it is not a tie. 
                     }
                 }
             }
@@ -203,7 +203,7 @@ namespace FourInARow
 
         }
 
-        public WinState checkWinstateDiagonalRightUp()
+        public WinState checkWinstateDiagonalRightUp()//checks every combination of 4 cells horizontally in a diagonal going up-right, and calls checkWinStateOfCells on them.
         {
             for (int i = 0; i < pos.GetLength(0) - numNeededInRow + 1; i++)
             {
@@ -220,7 +220,7 @@ namespace FourInARow
 
         }
 
-        public WinState checkWinstateDiagonalRightDown()
+        public WinState checkWinstateDiagonalRightDown()//checks every combination of 4 cells horizontally in a diagonal going down-right, and calls checkWinStateOfCells on them.
         {
             for (int i = 0; i < pos.GetLength(0) - numNeededInRow + 1; i++)
             {
@@ -237,7 +237,8 @@ namespace FourInARow
 
         }
 
-        public WinState checkWinstate()
+        public WinState checkWinstateOverall() // Checks if any player has won, vertically, horizontally, or diagonally. Uses the other checkWinner Functions. 
+
         {
             WinState winState = checkWinstateHorizontal();
             if (winState != WinState.noWinner)
@@ -267,9 +268,6 @@ namespace FourInARow
                 return winState;
             }
             return WinState.noWinner;
-
-
-
         }
 
     }
