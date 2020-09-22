@@ -33,13 +33,13 @@ namespace FourInARow
                         Console.WriteLine("O wins!");
                         break;
                     }
-                    else if (winState == FourInARowPos.WinState.Xwins)// if X wins, tell the user that O won and close the program
+                    else if (winState == FourInARowPos.WinState.Xwins)// if X wins, tell the user that X won and close the program
                     {
                         Console.WriteLine("");
                         Console.WriteLine("X wins!");
                         break;
                     }
-                    else if (winState == FourInARowPos.WinState.tie)// if there's a tie, tell the user that O won and close the program
+                    else if (winState == FourInARowPos.WinState.tie)// if there's a tie, tell the user that it's a tie and close the program
                     {
                         Console.WriteLine("");
                         Console.WriteLine("It's a tie!");
@@ -55,7 +55,7 @@ namespace FourInARow
                 }
                 catch (System.ArgumentException)//If the user didn't enter a number between 1 and 7, or if he entered a number of a row that's already full of chips, tell him that next time
                 {
-                    prevError = true;
+                    prevError = true; // next time, give the user a message saying that what they entered was invalid. 
                 }
                 catch (System.FormatException)
                 {
