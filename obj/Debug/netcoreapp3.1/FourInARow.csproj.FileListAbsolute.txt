@@ -1,0 +1,13 @@
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.exe
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.deps.json
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.runtimeconfig.json
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.runtimeconfig.dev.json
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.dll
+C:\Users\guykn\source\repos\FourInARow\FourInARow\bin\Debug\netcoreapp3.1\FourInARow.pdb
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.csprojAssemblyReference.cache
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.AssemblyInfoInputs.cache
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.AssemblyInfo.cs
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.csproj.CoreCompileInputs.cache
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.dll
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.pdb
+C:\Users\guykn\source\repos\FourInARow\FourInARow\obj\Debug\netcoreapp3.1\FourInARow.genruntimeconfig.cache
